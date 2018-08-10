@@ -20,8 +20,7 @@ Events.prototype.getData = function () {
 
   request.get()
     .then((data) => {
-      this.data = data.message;
-      console.log(data.data["Events"]);
+      this.data = data.data["Events"];
       PubSub.publish("Events:event-data-ready", this.data);
     })
     .catch((err) => {
