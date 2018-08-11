@@ -6,14 +6,8 @@ SelectView.prototype.bindEvents = function () {
   const inputField = document.querySelector("#date");
   inputField.addEventListener("change", (evt) => {
     const selectedDate = evt.target.value;
-    console.log(selectedDate);
-  })
+    PubSub.publish("SelectView:selected-date-ready", selectedDate);
+  });
 };
-
-
-
-
-
-
 
 module.exports = SelectView;

@@ -11,8 +11,13 @@ function timeStamp() {
   return date.join("/");
 };
 
+Events.prototype.bindEvents = function () {
+  this.getTodaysData();
+  this.getSelectedDaysData();
+};
+
 Events.prototype.getTodaysData = function () {
-  const date = timeStamp();
+  // const date = timeStamp();
 
   const url = "https://history.muffinlabs.com/date";
   const request = new Request(url);
@@ -25,6 +30,13 @@ Events.prototype.getTodaysData = function () {
     .catch((err) => {
       console.error(err);
     });
+};
+
+Events.prototype.getSelectedDaysData = function () {
+  PubSub.subscribe("SelectView:selected-date-ready", (evt) => {
+    const rawDate = evt.detail;
+    console.log("Raw Date", rawDate);
+  });
 };
 
 
