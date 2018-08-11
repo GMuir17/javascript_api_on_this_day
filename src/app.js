@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   eventListView.bindEvents();
 
   const events = new Events();
-  events.getData();
+  events.getTodaysData();
 
 
 });

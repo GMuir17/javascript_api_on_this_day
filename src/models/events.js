@@ -7,13 +7,12 @@ const Events = function () {
 
 function timeStamp() {
   const now = new Date();
-  const date = [now.getFullYear(), now.getMonth(), now.getDate()];
-  return date.join("-");
+  const date = [now.getMonth() + 1, now.getDate()];
+  return date.join("/");
 };
 
-Events.prototype.getData = function () {
+Events.prototype.getTodaysData = function () {
   const date = timeStamp();
-  console.log("date", date);
 
   const url = "https://history.muffinlabs.com/date";
   const request = new Request(url);
