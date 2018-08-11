@@ -7,25 +7,14 @@ EventView.prototype.render = function () {
   const eventContainer = document.createElement("div");
   this.container.appendChild(eventContainer);
 
-  const eventList = this.createList();
-  eventContainer.appendChild(eventList);
-};
-
-EventView.prototype.createList = function () {
-  const eventInfoList = document.createElement("ul");
-  this.populateList(eventInfoList);
-  return eventInfoList;
-};
-
-EventView.prototype.populateList = function (list) {
-  const eventYear = document.createElement("li");
-  const eventText = document.createElement("li");
-
+  const eventYear = document.createElement("h4");
   eventYear.textContent = this.event["year"];
-  eventText.textContent = this.event["text"];
+  eventContainer.appendChild(eventYear);
 
-  list.appendChild(eventYear);
-  list.appendChild(eventText);
+  const eventText = document.createElement("p");
+  eventText.textContent = this.event["text"];
+  eventContainer.appendChild(eventText);
 };
+
 
 module.exports = EventView;
