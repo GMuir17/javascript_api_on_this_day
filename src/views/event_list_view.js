@@ -13,7 +13,7 @@ EventListView.prototype.bindEvents = function () {
   PubSub.subscribe("Events:selected-day-data-ready", (evt) => {
     const specificEvents = evt.detail;
     this.render(specificEvents);
-  })
+  });
 };
 
 EventListView.prototype.render = function (events) {

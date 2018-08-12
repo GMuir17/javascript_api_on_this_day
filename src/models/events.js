@@ -38,6 +38,7 @@ Events.prototype.getSelectedDaysData = function () {
     const formattedDate = formatUserDate(rawDate);
 
     const url = `https://history.muffinlabs.com/date/${formattedDate}`;
+    console.log("Url", url);
     const request = new Request(url);
 
     request.get()
