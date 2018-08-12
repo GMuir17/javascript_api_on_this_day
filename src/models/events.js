@@ -35,13 +35,16 @@ Events.prototype.getTodaysData = function () {
 Events.prototype.getSelectedDaysData = function () {
   PubSub.subscribe("SelectView:selected-date-ready", (evt) => {
     const rawDate = evt.detail;
+    console.log("Raw", rawDate);
     const formattedDate = formatUserDate(rawDate);
-    console.log(formattedDate);
+    console.log("Formatted", formattedDate);
   });
 };
 
 function formatUserDate(date) {
-  return "Bananas"
+  const dateArray = date.split("/");
+  const formattedDate = dateArray[1] + "/" + dateArray[0];
+  return formattedDate;
 };
 
 
