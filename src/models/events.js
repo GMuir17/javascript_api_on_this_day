@@ -35,9 +35,19 @@ Events.prototype.getTodaysData = function () {
 Events.prototype.getSelectedDaysData = function () {
   PubSub.subscribe("SelectView:selected-date-ready", (evt) => {
     const rawDate = evt.detail;
-    console.log("Raw", rawDate);
     const formattedDate = formatUserDate(rawDate);
-    console.log("Formatted", formattedDate);
+
+    const url = `https://history.muffinlabs.com/date/${formattedDate}`;
+    const request = new Request(url);
+
+    request.get()
+      .then((data) => {
+        this.data = data.data["Events"];
+        PubSub.publish("Events:selected-day-data-ready", this.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
 };
 
