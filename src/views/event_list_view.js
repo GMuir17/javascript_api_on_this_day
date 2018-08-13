@@ -19,7 +19,12 @@ EventListView.prototype.bindEvents = function () {
   PubSub.subscribe("Events:deaths-data-ready", (evt) => {
     const deaths = evt.detail;
     this.render(deaths);
-  })
+  });
+
+  PubSub.subscribe("Events:births-data-ready", (evt) => {
+    const births = evt.detail;
+    this.render(births);
+  });
 };
 
 EventListView.prototype.render = function (events) {

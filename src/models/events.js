@@ -4,6 +4,7 @@ const Request = require("../helpers/request.js");
 const Events = function () {
   this.data = null;
   this.deaths = null;
+  this.births = null;
 };
 
 // function timeStamp() {
@@ -16,6 +17,7 @@ Events.prototype.bindEvents = function () {
   this.getTodaysData();
   this.getSelectedDaysData();
   this.getDeathsData();
+  this.getBirthsData();
 };
 
 Events.prototype.getTodaysData = function () {
@@ -28,6 +30,7 @@ Events.prototype.getTodaysData = function () {
     .then((data) => {
       this.data = data.data["Events"];
       this.deaths = data.data["Deaths"];
+      this.births = data.data["Births"];
       PubSub.publish("Events:event-data-ready", this.data);
     })
     .catch((err) => {
@@ -57,8 +60,13 @@ Events.prototype.getSelectedDaysData = function () {
 
 Events.prototype.getDeathsData = function () {
   PubSub.subscribe("SelectView:deaths-selected", (evt) => {
-    console.log("Deaths data", this.deaths);
     PubSub.publish("Events:deaths-data-ready", this.deaths);
+  });
+};
+
+Events.prototype.getBirthsData = function () {
+  PubSub.subscribe("SelectView:births-selected", (evt) => {
+    PubSub.publish("Events:births-data-ready", this.births);
   });
 };
 
