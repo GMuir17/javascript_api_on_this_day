@@ -3,17 +3,19 @@ const Request = require("../helpers/request.js");
 
 const Events = function () {
   this.data = null;
+  this.deaths = null;
 };
 
-function timeStamp() {
-  const now = new Date();
-  const date = [now.getMonth() + 1, now.getDate()];
-  return date.join("/");
-};
+// function timeStamp() {
+//   const now = new Date();
+//   const date = [now.getMonth() + 1, now.getDate()];
+//   return date.join("/");
+// };
 
 Events.prototype.bindEvents = function () {
   this.getTodaysData();
   this.getSelectedDaysData();
+  this.getDeathsData();
 };
 
 Events.prototype.getTodaysData = function () {
@@ -25,6 +27,7 @@ Events.prototype.getTodaysData = function () {
   request.get()
     .then((data) => {
       this.data = data.data["Events"];
+      this.deaths = data.data["Deaths"];
       PubSub.publish("Events:event-data-ready", this.data);
     })
     .catch((err) => {
@@ -49,6 +52,13 @@ Events.prototype.getSelectedDaysData = function () {
       .catch((err) => {
         console.error(err);
       });
+  });
+};
+
+Events.prototype.getDeathsData = function () {
+  PubSub.subscribe("SelectView:deaths-selected", (evt) => {
+    console.log("Deaths data", this.deaths);
+    PubSub.publish("Events:deaths-data-ready", this.deaths);
   });
 };
 

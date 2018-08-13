@@ -5,6 +5,7 @@ const EventView = function (container, event) {
 
 EventView.prototype.render = function () {
   const eventContainer = document.createElement("div");
+  eventContainer.classList.add("event");
   this.container.appendChild(eventContainer);
 
   const eventYear = document.createElement("h4");
@@ -14,6 +15,9 @@ EventView.prototype.render = function () {
   const eventText = document.createElement("p");
   eventText.textContent = this.event["text"];
   eventContainer.appendChild(eventText);
+
+  const eventBreak = document.createElement("br");
+  eventContainer.appendChild(eventBreak);
 };
 
 

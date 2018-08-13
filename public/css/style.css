@@ -1,3 +1,18 @@
 body {
-  font-family: 'Vesper Libre', serif;
+  font-family: 'PT Sans', sans-serif;
+  background-color: #C8A17F;
+  color: #3C130E;
+}
+
+#event-container {
+  border: 1px solid #816041;
+}
+
+.event {
+  border: 1px solid #816041;
+  padding: 10px;
+}
+
+.nav-item {
+  display: inline;
 }
