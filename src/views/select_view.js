@@ -19,6 +19,11 @@ SelectView.prototype.bindEvents = function () {
   birthSelect.addEventListener("click", (evt) => {
     PubSub.publish("SelectView:births-selected", evt.detail)
   });
+
+  const eventsSelect = document.querySelector("#events-select");
+  eventsSelect.addEventListener("click", (evt) => {
+    PubSub.publish("SelectView:events-selected", evt.detail)
+  });
 };
 
 module.exports = SelectView;

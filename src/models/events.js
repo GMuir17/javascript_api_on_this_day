@@ -18,6 +18,7 @@ Events.prototype.bindEvents = function () {
   this.getSelectedDaysData();
   this.getDeathsData();
   this.getBirthsData();
+  this.getEventsData();
 };
 
 Events.prototype.getTodaysData = function () {
@@ -44,7 +45,6 @@ Events.prototype.getSelectedDaysData = function () {
     const formattedDate = formatUserDate(rawDate);
 
     const url = `https://history.muffinlabs.com/date/${formattedDate}`;
-    console.log("Url", url);
     const request = new Request(url);
 
     request.get()
@@ -67,6 +67,12 @@ Events.prototype.getDeathsData = function () {
 Events.prototype.getBirthsData = function () {
   PubSub.subscribe("SelectView:births-selected", (evt) => {
     PubSub.publish("Events:births-data-ready", this.births);
+  });
+};
+
+Events.prototype.getEventsData = function () {
+  PubSub.subscribe("SelectView:events-selected", (evt) => {
+    PubSub.publish("Events:event-data-ready", this.data);
   });
 };
 
